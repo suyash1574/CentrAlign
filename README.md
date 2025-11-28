@@ -1,26 +1,14 @@
-CentrAlign AI Agent – Chrome Extension (Assignment Submission)
-Overview
+# CentrAlign AI Agent – Chrome Extension (Assignment Submission)
 
-This project implements a fully local AI Reasoning Agent inside a Chrome Extension (Manifest V3) as required in the assignment.
-The extension performs:
+This project implements a fully local **AI Reasoning Agent** inside a Chrome Extension (Manifest V3).  
+The extension uses a rule-based planner, local semantic search, keyword search, hybrid routing, and a Pinecone fallback stub, all running offline.
 
-Rule-based planning
+The popup UI is modern, minimal, and responsive.
 
-Local semantic search (toy embeddings + cosine similarity)
+---
 
-Local keyword search (normalized scores)
+# 📌 Project Structure
 
-Hybrid matching
-
-Confidence-based fallback (Pinecone stub)
-
-Structured JSON output
-
-Modern, clean popup UI
-
-Everything runs entirely offline, with no external API calls.
-
-Project Structure
 centralign-agent/
 │
 ├── manifest.json
@@ -28,85 +16,46 @@ centralign-agent/
 ├── popup.js
 ├── background.js
 ├── agent.js
-├── agent_node.js        (optional local runner)
+├── agent_node.js
 ├── icon16.png
 ├── icon48.png
 └── icon128.png
 
-Features Implemented
-✅ 1. Manifest V3 Chrome Extension
+yaml
+Copy code
 
-Uses service worker (background.js)
+---
 
-Popup UI connected with chrome.runtime.sendMessage
+# 🚀 Features Implemented
 
-Fully modular architecture
+### ✔ Manifest V3 Compliant  
+### ✔ Rule-Based AI Planner (no LLM)  
+### ✔ Local Semantic Search (bag-of-words + cosine similarity)  
+### ✔ Local Keyword Search (normalized match scores)  
+### ✔ Hybrid Tool Routing  
+### ✔ Pinecone Fallback Stub (<0.75 confidence)  
+### ✔ Full JSON Output Structure  
+### ✔ Modern Clean UI  
+### ✔ Optional Node.js Local Runner  
 
-✅ 2. Reasoning Planner (Rule-Based, No LLM)
+Everything runs completely locally.
 
-The planner decides:
+---
 
-semantic_search
+# 🧠 AI Agent Architecture
 
-keyword_search
+User Query → Planner → Semantic Search + Keyword Search → Decision → Fallback (optional) → JSON Response
 
-hybrid
+arduino
+Copy code
 
-Decision is based on:
+The agent returns:
 
-Query length
-
-Keyword match strength
-
-Score comparison
-
-Thresholds
-
-Planner returns a reasoning trace.
-
-✅ 3. Local Semantic Search
-
-Tokenizer
-
-Bag-of-words embedding
-
-Vector generation
-
-Cosine similarity
-
-Top-K = 3 scoring
-
-Runs 100% offline.
-
-✅ 4. Local Keyword Search
-
-Word overlap scoring
-
-Score normalization
-
-Top-K = 3
-
-✅ 5. Fallback System
-
-If highest score < 0.75, a fake Pinecone stub is triggered:
-
-Pinecone stub: no real API called.
-
-
-This simulates external vector DB fallback behavior.
-
-✅ 6. Structured JSON Response
-
-Extension returns exactly this format:
-
+```json
 {
   "planner_decision": "",
   "used_fallback_tool": false,
-  "best_match": {
-    "text": "",
-    "score": 0.0,
-    "source": ""
-  },
+  "best_match": { "text": "", "score": 0.0, "source": "" },
   "trace": {
     "reasoning": "",
     "semantic_top_k_scores": [],
@@ -114,84 +63,17 @@ Extension returns exactly this format:
     "latency_ms": 0
   }
 }
-
-
-This is strictly followed.
-
-✅ 7. Modern & Clean Popup UI
-
-Built with:
-
-Card layout
-
-Rounded inputs
-
-Gradient button
-
-Smooth spacing
-
-Toggle-style Trace UI
-
-User sees:
-
-Best match
-
-Score
-
-Source (local/pinecone)
-
-Optional trace panel
-
-How to Run the Extension
-1. Extract ZIP
-
-Unzip centralign-agent.zip.
-
-2. Open Chrome Extensions
-
-Visit:
-
-chrome://extensions
-
+🖥 Installation & Running
+1. Extract the ZIP
+2. Open Chrome → chrome://extensions/
 3. Enable Developer Mode
-4. Load Unpacked
-
-Choose the folder:
-
-centralign-agent/
-
-5. Open popup
-
-Click the extension icon → type a query → press Ask.
-
-Test Queries
-
-Try:
-
-Install CentrAlign using trial code
-
-
-or
-
-What does the planner do?
-
-Optional – Run Local Node Version
-node agent_node.js "your query"
-
-Notes
-
-This project follows every requirement of the assignment including:
-
-Modular code design
-
-Local inference logic
-
-Separate agent module
-
-Planner design
-
-Fallback logic
-
-JSON format compliance
-
-UI requirements
+4. Click Load Unpacked
+5. Select the extracted folder
+6. Click extension icon → enter query
+🧪 Example Queries
+pgsql
+Copy code
+What is TRIAL-100 code?
+How do I install CentrAlign?
+Explain the planner.
+Explain semantic search.
